@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "run-zine",
+    "title": "Run Zine",
+    "year": "2023",
+    "tags": ["run", "mental health", "brighton", "comics"],
+    "blurb": "A zine about learning to run",
+    "cover": "zines/run-zine/run1.png",
+    "pages": [
+      "zines/run-zine/run2.png",
+      "zines/run-zine/run3.png",
+      "zines/run-zine/ru4.png",
+      "zines/run-zine/run5.png"
+    ]
+  },
+  {
+    "slug": "af-zine",
+    "title": "Auntie Fatima the Anti-facist aunt",
+    "year": "2018",
+    "tags": ["politics", "comic", "anti-racism", "history"],
+    "blurb": "Auntie Fatima the anti-facist aunt.",
+    "cover": "zines/af-zine/AF-01.png",
+    "pages": [
+      "zines/af-zine/AF-02.png",
+      "zines/af-zine/AF-03.png",
+      "zines/af-zine/AF-04.png",
+      "zines/af-zine/AF-05.png"
+    ]
+  },
+  {
+    "slug": "Choose-zine",
+    "title": "Choosing You",
+    "year": "2022",
+    "tags": ["relationships", "politics", "comic"],
+    "blurb": "A zine that challenges partner centeric culture",
+    "cover": "zines/choose-zine/Choose1.png",
+    "pages": [
+      "zines/choose-zine/Choose2.png",
+      "zines/choose-zine/Choose3.png",
+      "zines/choose-zine/Choose4.png",
+      "zines/choose-zine/Choose5.png.jpg"
+    ]
+  }
+]

@@ -1,0 +1,488 @@
+/* =========================================================
+   SOOF'S ZINE MACHINE
+   The whole page is the machine: a header nameplate, and a
+   cabinet body with three windows — tag buttons, the cover
+   library, and a built-in reading screen. Photocopy texture
+   behind everything; Polaris palette (blue/yellow/pink) for
+   the sticker-style controls on top of it.
+   ========================================================= */
+
+:root {
+  --blue: #008BD8;
+  --yellow: #F7DA2D;
+  --yellow-2: #ffd800;
+  --pink: #DB529D;
+  --ink: #10171b;
+  --grey: #6b6b6b;
+  --cabinet: #f4f2ec;
+  --cabinet-dark: #e2ded1;
+  --screen: #0e1114;
+  --shadow: 4px 4px 0 var(--ink);
+  --shadow-sm: 2px 2px 0 var(--ink);
+  --radius: 6px;
+  --font-display: 'Paytone One', sans-serif;
+  --font-body: 'Dosis', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background-color: #dedad0;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.4;
+  letter-spacing: 0.3px;
+  position: relative;
+}
+
+/* full-page photocopy texture, sitting behind everything */
+.page-texture {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: url("../assets/texture.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  opacity: 0.55;
+  filter: contrast(1.05);
+}
+.page-texture::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+::selection {
+  color: var(--blue);
+  background-color: var(--yellow);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+img { max-width: 100%; display: block; }
+[hidden] { display: none !important; }
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+.machine-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 18px 48px;
+  position: relative;
+}
+
+/* ================= HEADER / NAMEPLATE ================= */
+
+.machine-header {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto 18px;
+  background: none;
+  border: none;
+  padding: 0;
+  transition: transform .15s ease, filter .15s ease;
+}
+.machine-header:hover { transform: translateY(-2px); }
+.machine-header:active { transform: translateY(1px) scale(0.99); }
+.header-logo {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(3px 4px 0 rgba(16,23,27,0.25));
+}
+
+/* ================= MACHINE CABINET ================= */
+
+.machine-body {
+  position: relative;
+  background: var(--cabinet);
+  border: 3px solid var(--ink);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 22px;
+  display: grid;
+  grid-template-columns: 220px 1fr 1fr;
+  gap: 18px;
+  /* subtle brushed-metal stripes on the cabinet itself */
+  background-image: repeating-linear-gradient(
+    100deg,
+    rgba(0,0,0,0.015) 0px,
+    rgba(0,0,0,0.015) 2px,
+    transparent 2px,
+    transparent 6px
+  );
+}
+
+.panel {
+  background: #fff;
+  border: 2px dashed var(--ink);
+  border-radius: var(--radius);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.panel-label {
+  font-family: var(--font-display);
+  font-weight: normal;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  color: var(--blue);
+  text-transform: uppercase;
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: dashed 3px var(--yellow);
+  padding-bottom: 8px;
+}
+
+/* ---- decorative stickers ---- */
+.sticker {
+  position: absolute;
+  font-family: var(--font-display);
+  font-weight: normal;
+  font-size: 0.7rem;
+  letter-spacing: 0.5px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 2px solid var(--ink);
+  box-shadow: var(--shadow-sm);
+  pointer-events: none;
+  z-index: 2;
+}
+.sticker-1 {
+  top: -14px; left: 20px;
+  background: var(--pink);
+  color: #fff;
+  transform: rotate(-9deg);
+}
+.sticker-2 {
+  top: -12px; right: 24px;
+  background: var(--yellow);
+  color: var(--ink);
+  transform: rotate(6deg);
+}
+.sticker-3 {
+  bottom: -12px; left: 50%;
+  background: var(--blue);
+  color: #fff;
+  transform: translateX(-50%) rotate(-3deg);
+}
+
+/* ================= TAG PANEL ================= */
+
+.search-slot {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 9px 12px;
+  border: 1px solid #ccc;
+  border-radius: 999px;
+  margin-bottom: 12px;
+  width: 100%;
+}
+.search-slot:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(0, 139, 216, .15);
+}
+
+.tag-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  align-content: flex-start;
+  flex: 1;
+}
+
+.tag-pill {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.78rem;
+  border: 2px solid var(--ink);
+  background: #fff;
+  border-radius: 999px;
+  padding: 6px 12px;
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+  transition: transform .1s ease, background .15s ease, color .15s ease;
+}
+.tag-pill:hover { transform: translateY(-2px); }
+.tag-pill:active { transform: translateY(1px); box-shadow: 1px 1px 0 var(--ink); }
+.tag-pill.active {
+  background: var(--pink);
+  color: #fff;
+  border-color: var(--pink);
+}
+
+.reset-btn {
+  margin-top: 14px;
+  align-self: flex-start;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border: 2px solid var(--ink);
+  background: var(--yellow);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 7px 16px;
+  box-shadow: var(--shadow-sm);
+  transition: background .15s ease;
+}
+.reset-btn:hover { background: var(--blue); color: #fff; }
+
+/* ================= WINDOW PANEL (covers) ================= */
+
+.cover-window {
+  flex: 1;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  background:
+    linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)),
+    repeating-linear-gradient(180deg, rgba(0,0,0,.03) 0px, rgba(0,0,0,.03) 1px, transparent 1px, transparent 22px);
+  padding: 10px;
+  overflow-y: auto;
+  max-height: 520px;
+}
+
+.cover-scroll {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 14px;
+}
+
+.zine-card {
+  position: relative;
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  padding: 6px 6px 8px;
+  text-align: left;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  transform: rotate(var(--tilt, -1deg));
+}
+.zine-card:nth-child(3n+1) { --tilt: -2deg; }
+.zine-card:nth-child(3n+2) { --tilt: 1.2deg; }
+.zine-card:nth-child(3n+3) { --tilt: -0.6deg; }
+
+.zine-card:hover {
+  transform: rotate(0deg) translateY(-3px);
+  border-color: var(--blue);
+  box-shadow: 3px 3px 0 var(--blue);
+  z-index: 2;
+}
+
+.zine-card.selected {
+  border-color: var(--pink);
+  box-shadow: 3px 3px 0 var(--pink);
+}
+
+.zine-card-btn {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+}
+
+.zine-cover-wrap {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #eee;
+  aspect-ratio: 850 / 1100;
+  background: var(--cabinet-dark);
+}
+.zine-cover-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.zine-card-title {
+  font-family: var(--font-display);
+  font-weight: normal;
+  font-size: 0.78rem;
+  color: var(--blue);
+  margin: 7px 1px 1px;
+  line-height: 1.15;
+}
+.zine-card-year {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.65rem;
+  color: var(--grey);
+  margin: 0 1px;
+}
+
+.empty-state {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  text-align: center;
+  color: var(--grey);
+  padding: 24px 8px;
+}
+
+/* ================= VIEWER PANEL ================= */
+
+.viewer-screen {
+  position: relative;
+  flex: 1;
+  background: var(--screen);
+  border: 3px solid var(--ink);
+  border-radius: 6px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 260px;
+  box-shadow: inset 0 0 24px rgba(0,0,0,.6);
+}
+
+.viewer-idle {
+  color: #9aa3a8;
+  font-family: var(--font-body);
+  font-weight: 600;
+  text-align: center;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+  padding: 0 10px;
+}
+
+.viewer-active {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  height: 100%;
+}
+
+.viewer-active.dispensing .reader-page {
+  animation: whir .35s ease-in-out;
+}
+@keyframes whir {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  40% { transform: translateY(4px); opacity: .7; }
+}
+
+.reader-nav {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--yellow);
+  background: transparent;
+  color: var(--yellow);
+  font-size: 1rem;
+  transition: background .15s ease, color .15s ease;
+}
+.reader-nav:hover { background: var(--yellow); color: var(--ink); }
+.reader-nav:disabled { opacity: .25; cursor: default; background: transparent; color: var(--yellow); }
+
+.reader-page {
+  flex: 1;
+  background: #fff;
+  border-radius: 2px;
+  max-height: 320px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.reader-page img {
+  width: 100%;
+  height: auto;
+  max-height: 320px;
+  object-fit: contain;
+}
+
+.viewer-meta {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--grey);
+}
+.viewer-meta h3 {
+  font-family: var(--font-display);
+  font-weight: normal;
+  color: var(--blue);
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+}
+.viewer-meta p { margin: 3px 0; color: var(--grey); font-size: 0.85rem; }
+.reader-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 7px 0;
+}
+.mini-tag {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.65rem;
+  background: #fff;
+  border: 1px solid var(--pink);
+  color: var(--pink);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+.reader-pagenum {
+  font-family: var(--font-body);
+  font-weight: 700 !important;
+  font-size: 0.75rem !important;
+  color: var(--pink) !important;
+  letter-spacing: 0.5px;
+}
+
+/* ================= FOOTER ================= */
+
+.site-footer {
+  text-align: center;
+  margin-top: 28px;
+  padding-top: 16px;
+  color: var(--grey);
+  font-size: .85rem;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 860px) {
+  .machine-body {
+    grid-template-columns: 1fr;
+  }
+  .cover-window { max-height: 420px; }
+}
+
+@media (max-width: 560px) {
+  .machine-page { padding: 18px 12px 36px; }
+  .machine-body { padding: 16px 14px; gap: 14px; border-radius: 10px; }
+  .sticker { font-size: 0.6rem; padding: 5px 9px; }
+  .sticker-1 { left: 10px; }
+  .sticker-2 { right: 10px; }
+  .viewer-screen { min-height: 220px; }
+  .reader-page { max-height: 240px; }
+  .reader-page img { max-height: 240px; }
+}
