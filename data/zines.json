@@ -5,11 +5,11 @@
     "year": "2023",
     "tags": ["run", "mental health", "brighton", "comics"],
     "blurb": "A zine about learning to run",
-    "cover": "zines/run-zine/run1.png",
+    "cover": "zines/run-zine/Run1.png",
     "pages": [
       "zines/run-zine/run2.png",
       "zines/run-zine/run3.png",
-      "zines/run-zine/ru4.png",
+      "zines/run-zine/run4.png",
       "zines/run-zine/run5.png"
     ]
   },
